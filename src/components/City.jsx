@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import styles from "./City.module.css";
-import ButtonBack from "./components/ButtonBack";
+import ButtonBack from "./ButtonBack";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -15,6 +15,11 @@ function City() {
 
   // const x = useParams();
   const {id}= useParams();
+  const [searchParams, setSearchParams] = useSearchParams(); // its like useState hookn, whcih also give array
+
+  const lat = searchParams.get('lat');
+  const lng = searchParams.get('lng');
+  
   // console.log(x);
   // TEMP DATA
   const currentCity = {
@@ -26,8 +31,12 @@ function City() {
 
   const { cityName, emoji, date, notes } = currentCity;
 
-  return (
+  return (<>
     <p>City detailed data {id}</p>
+    <p>position coordinates :
+      {lat} and {lng}
+    </p>
+    </>
     // <div className={styles.city}>
     //   <div className={styles.row}>
     //     <h6>City name</h6>

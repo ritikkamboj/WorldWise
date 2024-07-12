@@ -9,7 +9,7 @@ import Login from "./Pages/Login";
 import CityList from "./components/CityList";
 import { useEffect, useState } from "react";
 import CountryList from "./components/CountryList";
-import City from "./City";
+import City from "./components/City";
 
 
 const BASE_URL = 'http://localhost:9000' ;

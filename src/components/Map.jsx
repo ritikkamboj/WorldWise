@@ -1,14 +1,16 @@
-import styles from './Map.module.css'
-
+/* eslint-disable no-unused-vars */
+import { useSearchParams } from "react-router-dom";
+import styles from "./Map.module.css";
 
 function Map() {
-    return (
-        <div className={styles.mapContainer}>
-            Map segment
+  const [searchParams, setSearchParams] = useSearchParams(); // its like useState hookn, whcih also give array
 
-            
-        </div>
-    )
+  const lat = searchParams.get('lat');
+  const lng = searchParams.get('lng');
+  return <div className={styles.mapContainer}>
+    <h1>Map Positions</h1>
+    <p>position : {lat} and {lng}</p>
+  </div>;
 }
 
-export default Map
+export default Map;
