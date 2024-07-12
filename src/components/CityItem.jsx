@@ -1,34 +1,34 @@
 /* eslint-disable react/prop-types */
-import styles from './CityItem.module.css'
+import styles from "./CityItem.module.css";
+import { Link } from "react-router-dom";
 
 const formatDate = (date) =>
-    new Intl.DateTimeFormat("en", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    
-    }).format(new Date(date));
+  new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(date));
 
-function CityItem({city}) {
-    console.log(city);
-    const {cityName,date,emoji}= city;
+function CityItem({ city }) {
+  console.log(city);
+  const { cityName, date, emoji, id } = city;
 
-    // function getFlagEmoji(countryCode) {
-    //     return countryCode
-    //       .toUpperCase()
-    //       .replace(/./g, char => String.fromCodePoint(char.charCodeAt() + 127397));
-    //   }
+  // function getFlagEmoji(countryCode) {
+  //     return countryCode
+  //       .toUpperCase()
+  //       .replace(/./g, char => String.fromCodePoint(char.charCodeAt() + 127397));
+  //   }
 
-    return (
-        <li className={styles.cityItem}>
-           <span className={styles.emoji}>{emoji}</span>
-           <h3 className={styles.name}>{cityName}</h3>
-           <time className={styles.date}>({formatDate(date)})</time>
-           <button className={styles.deleteBtn}>&times;</button>
-
-            {city.name}
-        </li>
-    )
+  return (
+    <li>
+      <Link className={styles.cityItem} to={`${id}`}>
+        <span className={styles.emoji}>{emoji}</span>
+        <h3 className={styles.name}>{cityName}</h3>
+        <time className={styles.date}>({formatDate(date)})</time>
+        <button className={styles.deleteBtn}>&times;</button>
+      </Link>
+    </li>
+  );
 }
 
-export default CityItem
+export default CityItem;
