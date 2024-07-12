@@ -12,6 +12,13 @@ const formatDate = (date) =>
 function CityItem({city}) {
     console.log(city);
     const {cityName,date,emoji}= city;
+
+    // function getFlagEmoji(countryCode) {
+    //     return countryCode
+    //       .toUpperCase()
+    //       .replace(/./g, char => String.fromCodePoint(char.charCodeAt() + 127397));
+    //   }
+
     return (
         <li className={styles.cityItem}>
            <span className={styles.emoji}>{emoji}</span>

@@ -8,14 +8,22 @@ import AppLayout from "./Pages/AppLayout";
 import Login from "./Pages/Login";
 import CityList from "./components/CityList";
 import { useEffect, useState } from "react";
+import CountryList from "./components/CountryList";
 
 
-const BASE_URL = 'http://localhost:9000' 
+const BASE_URL = 'http://localhost:9000' ;
+
+
+
+// Update cities array to use flag emojis
+
 
 function App() {
 
   const [cities, setCities]= useState([]);
   const [isLoading, setIsLoading]= useState();
+
+  
 
   useEffect(function(){
     async function fetchCities() {
@@ -28,6 +36,7 @@ function App() {
         const data = await res.json();
         console.log(data)
         setCities(data);
+        console.log(data)
       } catch (error) {
         console.error('There was an error fetching the data:', error);
       } finally {
@@ -49,7 +58,7 @@ function App() {
           <Route path="app" element={<AppLayout />}>
             <Route index element={<CityList cities={cities} isLoading={isLoading}/>} />
             <Route path="cities" element={<CityList cities={cities} isLoading={isLoading}/>} />
-            <Route path="countries" element={<p>Countries</p>} />
+            <Route path="countries" element={<CountryList cities={cities} isLoading={isLoading}/>} />
             <Route path="form" element={<p>Form</p>} />
           </Route>
           <Route path="login" element={<Login />} />
