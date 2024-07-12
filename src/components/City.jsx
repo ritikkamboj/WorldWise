@@ -36,6 +36,7 @@ function City() {
     <p>position coordinates :
       {lat} and {lng}
     </p>
+    {/* <button onClick={()=>setSearchParams({lat : 23 , lng : 45})}>click here </button> */}
     </>
     // <div className={styles.city}>
     //   <div className={styles.row}>
