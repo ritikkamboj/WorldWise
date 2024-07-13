@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useParams, useSearchParams } from "react-router-dom";
 import styles from "./City.module.css";
-import ButtonBack from "./ButtonBack";
+// import ButtonBack from "./ButtonBack";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {

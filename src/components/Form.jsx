@@ -1,9 +1,12 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Form.module.css";
+import Button from "./Button";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -14,6 +17,7 @@ export function convertToEmoji(countryCode) {
 }
 
 function Form() {
+  const navigate = useNavigate();
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
@@ -50,8 +54,17 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        <button>Add</button>
-        <button>&larr; Back</button>
+        <Button type="primary">Add</Button>
+        <Button
+          type="back"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+          }}
+        >
+          &larr; Back
+        </Button>
+        {/* <button> Back</button> */}
       </div>
     </form>
   );
