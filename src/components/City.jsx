@@ -1,6 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useParams, useSearchParams } from "react-router-dom";
 import styles from "./City.module.css";
+import { useCities } from "../contexts/CitiesContext";
+import { useEffect } from "react";
+import Spinner from './Spinner';
+import ButtonBack from "./ButtonBack";
 // import ButtonBack from "./ButtonBack";
 
 const formatDate = (date) =>
@@ -15,64 +19,61 @@ function City() {
 
   // const x = useParams();
   const {id}= useParams();
-  const [searchParams, setSearchParams] = useSearchParams(); // its like useState hookn, whcih also give array
-
-  const lat = searchParams.get('lat');
-  const lng = searchParams.get('lng');
+  const {currentCity,getCity, isLoading} = useCities();
+ 
   
   // console.log(x);
   // TEMP DATA
-  const currentCity = {
-    cityName: "Lisbon",
-    emoji: "🇵🇹",
-    date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
-  };
+  // const currentCity = {
+  //   cityName: "Lisbon",
+  //   emoji: "🇵🇹",
+  //   date: "2027-10-31T15:59:59.138Z",
+  //   notes: "My favorite city so far!",
+  useEffect(function(){
+    getCity(id);
+  },[id])
+  // };
 
   const { cityName, emoji, date, notes } = currentCity;
+  if(isLoading) return <Spinner/>
 
-  return (<>
-    <p>City detailed data {id}</p>
-    <p>position coordinates :
-      {lat} and {lng}
-    </p>
-    {/* <button onClick={()=>setSearchParams({lat : 23 , lng : 45})}>click here </button> */}
-    </>
-    // <div className={styles.city}>
-    //   <div className={styles.row}>
-    //     <h6>City name</h6>
-    //     <h3>
-    //       <span>{emoji}</span> {cityName}
-    //     </h3>
-    //   </div>
 
-    //   <div className={styles.row}>
-    //     <h6>You went to {cityName} on</h6>
-    //     <p>{formatDate(date || null)}</p>
-    //   </div>
+  return (
+    <div className={styles.city}>
+      <div className={styles.row}>
+        <h6>City name</h6>
+        <h3>
+          <span>{emoji}</span> {cityName}
+        </h3>
+      </div>
 
-    //   {notes && (
-    //     <div className={styles.row}>
-    //       <h6>Your notes</h6>
-    //       <p>{notes}</p>
-    //     </div>
-    //   )}
+      <div className={styles.row}>
+        <h6>You went to {cityName} on</h6>
+        <p>{formatDate(date || null)}</p>
+      </div>
 
-    //   <div className={styles.row}>
-    //     <h6>Learn more</h6>
-    //     <a
-    //       href={`https://en.wikipedia.org/wiki/${cityName}`}
-    //       target="_blank"
-    //       rel="noreferrer"
-    //     >
-    //       Check out {cityName} on Wikipedia &rarr;
-    //     </a>
-    //   </div>
+      {notes && (
+        <div className={styles.row}>
+          <h6>Your notes</h6>
+          <p>{notes}</p>
+        </div>
+      )}
 
-    //   <div>
-    //     <ButtonBack />
-    //   </div>
-    // </div>
+      <div className={styles.row}>
+        <h6>Learn more</h6>
+        <a
+          href={`https://en.wikipedia.org/wiki/${cityName}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Check out {cityName} on Wikipedia &rarr;
+        </a>
+      </div>
+
+      <div>
+        <ButtonBack />
+      </div>
+    </div>
   );
 }
 
