@@ -15,24 +15,22 @@ import {
 import { useEffect, useState } from "react";
 import { useCities } from "../contexts/CitiesContext";
 import { useGeolocation } from "../hooks/useGeolocation";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 
 function Map() {
   const navigate = useNavigate();
 
   const { cities } = useCities();
 
-  const [searchParams, setSearchParams] = useSearchParams(); // its like useState hookn, whcih also give array
-  console.log(searchParams);
+  // console.log(searchParams);
   const [mapPosition, setMapPaosition] = useState([100, 100]);
   const {
     isLoading: isLoadingPosition,
     position: geoLocationPosition,
     getPosition,
   } = useGeolocation();
-
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
-  console.log(lat, lng);
+  
+ const [lat,lng]= useUrlPosition();
 
   useEffect(
     function () {
