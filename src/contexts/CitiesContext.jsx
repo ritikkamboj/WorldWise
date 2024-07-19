@@ -59,24 +59,42 @@ function CitiesProvider({ children }) {
         body: JSON.stringify(newCity),
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       });
       if (!res.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error("There was an error in creating a city ");
       }
       const data = await res.json();
       // console.log(data);
       // console.log(cities)
-      setCities((cities) => [...cities, data]);      // console.log(data);
+      setCities((cities) => [...cities, data]); // console.log(data);
     } catch (error) {
       console.error("There was an error fetching the data:", error);
     } finally {
       setIsLoading(false);
     }
   }
+  async function deleteCity(id) {
+    try {
+      setIsLoading(true);
+      await fetch(`${BASE_URL}/cities/${id}`, {
+        method: "DELETE",
+      });
+    
+      // console.log(data);
+      // console.log(cities)
+      setCities((cities) => cities.filter(city=> city.id !== id )); // console.log(data);
+    } catch (error) {
+      console.error("There was an error in deleting the city:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
-    <CitiesContext.Provider value={{ cities, isLoading, currentCity, getCity ,createCity}}>
+    <CitiesContext.Provider
+      value={{ cities, isLoading, currentCity, getCity, createCity, deleteCity }}
+    >
       {children}
     </CitiesContext.Provider>
   );

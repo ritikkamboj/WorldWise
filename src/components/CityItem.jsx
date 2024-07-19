@@ -12,7 +12,7 @@ const formatDate = (date) =>
 
 function CityItem({ city }) {
   console.log(city);
-  const {currentCity}= useCities();
+  const {currentCity, deleteCity}= useCities();
   const { cityName, date, emoji, id,position } = city;
   console.log(position)
 
@@ -21,6 +21,12 @@ function CityItem({ city }) {
   //       .toUpperCase()
   //       .replace(/./g, char => String.fromCodePoint(char.charCodeAt() + 127397));
   //   }
+  function handleClick(e)
+  {
+    e.preventDefault();
+    console.log('jai shree ram')
+    deleteCity(id);
+  }
 
   return (
     <li>
@@ -28,7 +34,7 @@ function CityItem({ city }) {
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>
         <time className={styles.date}>({formatDate(date)})</time>
-        <button className={styles.deleteBtn}>&times;</button>
+        <button className={styles.deleteBtn} onClick={handleClick}>&times;</button>
       </Link>
     </li>
   );
