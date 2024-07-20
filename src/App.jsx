@@ -12,6 +12,7 @@ import CountryList from "./components/CountryList";
 import City from "./components/City";
 import Form from "./components/Form";
 import { CitiesProvider } from "./contexts/CitiesContext";
+import { AuthProvider } from "./contexts/FakeAuthContext";
 
 
 
@@ -24,7 +25,8 @@ function App() {
 
   return (
     <div>
-    <CitiesProvider>
+      <AuthProvider>
+      <CitiesProvider>
     <BrowserRouter>
         <Routes>
           <Route path="Pricing" element={<Pricing />} />
@@ -42,6 +44,8 @@ function App() {
         </Routes>
       </BrowserRouter>
     </CitiesProvider>
+      </AuthProvider>
+   
     </div>
   );
 }
